@@ -8,6 +8,8 @@ def parse(url):
     tree = lxml.html.document_fromstring(api.text)
     text_original = tree.xpath('//*[@id="click_area"]/div//*[@class="original"]/text()')
     text_translate = tree.xpath('//*[@id="click_area"]/div//*[@class="translate"]/text()')
+    print(text_original[0])
+    print(text_translate[0])
     name = get_name(url)
     return text_original, text_translate, name
 
@@ -16,7 +18,6 @@ def write_txt(url):
     text_original, text_translate, name = parse(url)
     with open("%s.txt" % name, "w", newline='', encoding='utf-8') as txt_file:
         leng = len(text_original)
-        print(range(leng))
         for i in range(leng):
             txt_file.write(text_original[i])
             txt_file.write(text_translate[i])
