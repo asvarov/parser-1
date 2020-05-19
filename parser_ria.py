@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 HOST = 'https://auto.ria.com'
 URL = HOST + '/newauto/marka-jeep/'
-HEADERS = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:71.0) Gecko/20100101 Firefox/71.0', 'accept': '*/*'}
+HEADERS = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36'}
 
 
 def get_html(url, params=None):
