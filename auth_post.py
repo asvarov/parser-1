@@ -1,5 +1,6 @@
 import json
 import requests
+from account import login, password
 
 def loginbot(login, password):
     session = requests.Session()
@@ -15,7 +16,7 @@ def loginbot(login, password):
 
 if __name__ == '__main__':
 
-    req = loginbot('login', 'password')
+    req = loginbot(login, password)
     req2json = json.loads(req)
     print(req2json['response'])
 
