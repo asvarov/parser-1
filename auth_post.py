@@ -4,7 +4,6 @@ from account import login, password
 
 def loginbot(login, password):
     session = requests.Session()
-    session.get("https://goodgame.ru/forum")
     data = {'login': login,
             'password': password,
             'remember': '1',
@@ -12,11 +11,13 @@ def loginbot(login, password):
             'backurl': '',
     }
     request = session.post("https://goodgame.ru/ajax/login/", data=data)
-    return request.text
+    return request
 
 if __name__ == '__main__':
 
     req = loginbot(login, password)
-    req2json = json.loads(req)
+    req2json = json.loads(req.text)
+    print(req)
+    print(req2json)
     print(req2json['response'])
 
