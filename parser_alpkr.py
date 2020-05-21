@@ -1,3 +1,6 @@
+import csv
+import json
+
 import requests
 from account import name, pwd
 from bs4 import BeautifulSoup
@@ -31,26 +34,27 @@ def get_content(html):
             'status': item.find('a').find_next('a').find_next('td').get_text(strip=True),
             'link': 'http://alpkr.dp.ua' + item.find('td').find_next('a').get('href'),
         })
-    print(list_posts)
+    return list_posts
 
 
-def parse():
-    html = get_html(URL)
-    if html.status_code == 200:
-        last_page = get_pages_count(html.text)
-        cars = []
-        for page in range(1, last_page + 1):
-            print(f'Парсинг страницы { page } из { last_page }...')
-            html = get_html(URL, params={'page': page})
-            cars.extend(get_content(html.text))
-        print(f'Получено {len(cars)} автомобилей')
-        write_csv(cars)
-        return cars
-    else:
-        print('Error')
+def get_pages_count(html):
+    soup = BeautifulSoup(html, 'html.parser')
+    pagination = soup.find_all('ul', class_='pager')
+    for item in pagination:
+        last_page_href = item.find('li', class_='last').find_next('a').get('href')
+        return int(last_page_href.split("=")[-1])
 
+
+def write_csv(list_posts):
+    with open("alpkr_posts.csv", "w", newline='', encoding='utf-8') as csv_file:
+        writer = csv.writer(csv_file, delimiter=',')
+        writer.writerow(['Название', 'Автор', 'Статус', 'Ссылка'])
+        for post in list_posts:
+            writer.writerow([post['title'], post['author'], post['status'], post['link']])
 
 
 if __name__ == '__main__':
     html = alpkr(name, pwd)
-    get_content(html)
+    list_posts = get_content(html)
+    write_csv(list_posts)
+    print(get_pages_count(html))
