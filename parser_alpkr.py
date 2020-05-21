@@ -22,24 +22,15 @@ def alpkr(name, pwd):
 
 def get_content(html):
     posts = BeautifulSoup(html, 'html.parser')
-    items_odd = posts.find_all('tr', class_='odd')
-    items_even = posts.find_all('tr', class_='even')
+    items = posts.find_all('tr', {'class': ['odd', 'even']})
     list_posts = []
-    for item in items_odd:
+    for item in items:
         list_posts.append({
             'title': item.find('a').get_text(strip=True),
             'author': item.find('a').find_next('a').get_text(strip=True),
             'status': item.find('a').find_next('a').find_next('td').get_text(strip=True),
-            'link': 'http://alpkr.dp.ua' + item.find('td').find_next('a').get('href')
+            'link': 'http://alpkr.dp.ua' + item.find('td').find_next('a').get('href'),
         })
-    for item in items_even:
-        list_posts.append({
-            'title': item.find('a').get_text(strip=True),
-            'author': item.find('a').find_next('a').get_text(strip=True),
-            'status': item.find('a').find_next('a').find_next('td').get_text(strip=True),
-            'link': 'http://alpkr.dp.ua' + item.find('td').find_next('a').get('href')
-        })
-
     print(list_posts)
 
 
