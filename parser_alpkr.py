@@ -1,6 +1,4 @@
 import csv
-import json
-
 import requests
 from account import name, pwd
 from bs4 import BeautifulSoup
@@ -40,9 +38,11 @@ def get_content(html):
 def get_pages_count(html):
     soup = BeautifulSoup(html, 'html.parser')
     pagination = soup.find_all('ul', class_='pager')
-    for item in pagination:
-        last_page_href = item.find('li', class_='last').find_next('a').get('href')
-        return int(last_page_href.split("=")[-1])
+    last_page_href = pagination[0].find('li', class_='last').find_next('a').get('href')
+    return int(last_page_href.split("=")[-1])
+    # for item in pagination:
+    #     last_page_href = item.find('li', class_='last').find_next('a').get('href')
+    #     return int(last_page_href.split("=")[-1])
 
 
 def write_csv(list_posts):
