@@ -15,12 +15,10 @@ def get_file(url):
 def get_name(url):
     name = url.split('/')[-1]
     folder = url.split('/')[3]
-
     if not os.path.exists(folder):
         os.makedirs(folder)
     path = os.path.abspath(folder)
-
-    return path + '\\' + name
+    return os.path.join(path, name)
 
 
 def save_image(name, file_object):
