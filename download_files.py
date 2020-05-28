@@ -3,8 +3,7 @@ import os
 
 urls = ['https://images.pexels.com/photos/853199/pexels-photo-853199.jpeg',
         'https://images.pexels.com/photos/1402787/pexels-photo-1402787.jpeg',
-        'https://images.pexels.com/photos/1213447/pexels-photo-1213447.jpeg'
-]
+        'https://images.pexels.com/photos/1213447/pexels-photo-1213447.jpeg']
 
 
 def get_file(url):
