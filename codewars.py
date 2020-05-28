@@ -26,4 +26,26 @@ def alphabet_position(text):
                     'y': 25, 'x': 24, 'z': 26}
         print(alphabet['{}'.format(i)], end=' ')
 
-alphabet_position("The sunset sets! at twelve o' clock.")
+
+def spin_words(sentence):
+    """
+    Write a function that takes in a string of one or more words, and returns the same string, but with all five or more
+    letter words reversed (Just like the name of this Kata). Strings passed in will consist of only letters and spaces.
+    Spaces will be included only when more than one word is present.
+    Examples: spinWords( "Hey fellow warriors" ) => returns "Hey wollef sroirraw" spinWords( "This is a test") => returns
+    "This is a test" spinWords( "This is another test" )=> returns "This is rehtona test"
+    """
+    s = sentence.split()
+    l = len(s)
+    if l == 1:
+        print(s[0][::-1])
+    else:
+        for i in range(l):
+            if len(s[i]) > 5:
+                print(s[i][::-1], end=' ')
+            else:
+                print(s[i], end=' ')
+    return None
+
+
+spin_words("Hey fellow warriors")
