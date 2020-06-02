@@ -59,3 +59,4 @@ def square_digits(num):
     for i in range(l):
         print(int(num[i])**2, end='')
 
+
