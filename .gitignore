@@ -9,3 +9,4 @@ __pycache__/
 venv/
 account.py
 alpkr_posts.csv
+/file_example_MP3_5MG.mp3
