@@ -26,4 +26,4 @@ print(f'{b:,}')
 
 total = 567
 part = 432
-print(f'Percentage: {part/total:.2%}')
+print(f'Percentage: {part / total:.2%}')
