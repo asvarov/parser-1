@@ -3,7 +3,7 @@ import hvac
 client = hvac.Client(url='http://192.168.10.10:8200')
 client.sys.is_initialized()
 # False
-if client.sys.is_sealed() == True and client.sys.is_initialized() == False:
+if client.sys.is_sealed() is True and client.sys.is_initialized() is False:
     shares = 5
     threshold = 3
 
@@ -23,16 +23,12 @@ if client.sys.is_sealed() == True and client.sys.is_initialized() == False:
 
     print(f'Storage is sealed?: {client.sys.is_sealed()}') # True
     # unseal with individual keys
-    print('individual key #1:', (keys[0]))
-    print('individual key #2:', (keys[1]))
-    print('individual key #3:', (keys[2]))
-    print('individual key #4:', (keys[3]))
-    print('individual key #5:', (keys[4]))
+    for i in keys:
+        print(f'individual key #{keys.index(i)+1}: {keys[keys.index(i)]}')
 
-    # Unseal a Vault cluster with individual keys
-    unseal_response1 = client.sys.submit_unseal_key(keys[0])
-    unseal_response2 = client.sys.submit_unseal_key(keys[1])
-    unseal_response3 = client.sys.submit_unseal_key(keys[2])
+    for i in range(threshold):
+        # Unseal a Vault cluster with individual keys
+        unseal_response = client.sys.submit_unseal_key(keys[i])
 
     client.sys.seal()
     # <Response [204]>
