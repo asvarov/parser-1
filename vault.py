@@ -40,10 +40,10 @@ print('Storage is sealed?: ', client.sys.is_sealed()) # True
 
 # unseal with individual keys
 print('individual key #1: ', (keys[0]))
-print('individual key #2: '(keys[1]))
-print('individual key #3: '(keys[2]))
-print('individual key #4: '(keys[3]))
-print('individual key #5: '(keys[4]))
+print('individual key #2: ', (keys[1]))
+print('individual key #3: ', (keys[2]))
+print('individual key #4: ', (keys[3]))
+print('individual key #5: ', (keys[4]))
 
 # Unseal a Vault cluster with individual keys
 unseal_response1 = client.sys.submit_unseal_key(keys[0])
