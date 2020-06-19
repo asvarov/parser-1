@@ -22,39 +22,37 @@ import hvac
 
 
 client = hvac.Client(url='http://192.168.10.10:8200')
-print(client.sys.is_initialized()) # => False
+client.sys.is_initialized() # False
 
 shares = 5
 threshold = 3
 
 result = client.sys.initialize(shares, threshold)
-print(result)
 root_token = result['root_token']
-print(root_token)
+print('root token: ', root_token)
 keys = result['keys']
-print(keys)
 
-print(client.sys.is_initialized()) # => True
+client.sys.is_initialized() # True
 
 client.token = root_token
 
-print(client.sys.is_sealed()) # => True
+print('Storage is sealed?: ', client.sys.is_sealed()) # True
 
 # unseal with individual keys
-print((keys[0]))
-print((keys[1]))
-print((keys[2]))
+print('individual key #1: ', (keys[0]))
+print('individual key #2: '(keys[1]))
+print('individual key #3: '(keys[2]))
+print('individual key #4: '(keys[3]))
+print('individual key #5: '(keys[4]))
 
 # Unseal a Vault cluster with individual keys
 unseal_response1 = client.sys.submit_unseal_key(keys[0])
 unseal_response2 = client.sys.submit_unseal_key(keys[1])
 unseal_response3 = client.sys.submit_unseal_key(keys[2])
-print(client.sys.is_sealed())
 
-print(client.sys.seal()) # <Response [204]>
-print(client.sys.is_sealed()) # True
+client.sys.seal() # <Response [204]>
 
 # Unseal with multiple keys until threshold met
 unseal_response = client.sys.submit_unseal_keys(keys)
 
-client.sys.is_sealed() #False
+print('Storage is sealed?: ', client.sys.is_sealed()) #False
