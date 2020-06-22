@@ -1,8 +1,15 @@
 import csv
 import requests
-from account import name, pwd
 from bs4 import BeautifulSoup
 
+import hvac
+with open('root_token_vault.json', mode='r') as f:
+    root_token = f.read()
+
+client = hvac.Client(url='http://192.168.10.10:8200', token=root_token)
+read_response = client.secrets.kv.read_secret_version(path='alpkr')
+name = read_response['data']['data']['name']
+pwd = read_response['data']['data']['pwd']
 
 HEADERS = {
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36'}
